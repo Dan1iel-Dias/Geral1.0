@@ -1,0 +1,32 @@
+Set WshShell = WScript.CreateObject("WScript.Shell")
+
+Sub Executar()
+    WshShell.SendKeys "^l"      ' Ctrl + L (focar barra de endereço)
+    WScript.Sleep 500
+
+    WshShell.SendKeys "EXPSA"   ' Digita EXPSA
+    WScript.Sleep 500
+
+    WshShell.SendKeys "{DOWN}"  ' Pressiona seta para baixo
+    WScript.Sleep 200
+
+    WshShell.SendKeys "{ENTER}" ' Pressiona Enter
+    WScript.Sleep 1000
+
+    WshShell.SendKeys "{ENTER}" ' Pressiona Enter após 1 segundo
+    WScript.Sleep 15000
+
+    WshShell.SendKeys "{ENTER}" ' Pressiona Enter após 15 segundos
+End Sub
+
+' Aguarda 5 segundos apenas no início
+WScript.Sleep 5000
+
+' Primeira execução (você abre o site manualmente nesse tempo)
+Executar()
+
+' Aguarda 1 segundo entre as execuções
+WScript.Sleep 1000
+
+' Segunda execução (sem abrir o site de novo)
+Executar()

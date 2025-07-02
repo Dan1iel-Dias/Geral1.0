@@ -1,0 +1,34 @@
+function renumerarArtigosSemSimbolo() {
+  const doc = DocumentApp.openById("1bN91wlYFt2JJ1mta9KLQBOAIL47OYeZHDJ37T4GHmz8");
+  const body = doc.getBody();
+  const textElement = body.editAsText();
+
+  // Regex que captura "Artigo " + número, opcionalmente seguido por 'º'
+  const regex = /Artigo\s+(\d+)º?/g;
+
+  let contador = 1;
+  let searchResult = textElement.findText(regex.source);
+
+  while (searchResult !== null) {
+    const foundText = searchResult.getElement().asText();
+    const start = searchResult.getStartOffset();
+    const end = searchResult.getEndOffsetInclusive();
+
+    // Texto antigo do artigo (ex: "Artigo 42º")
+    const textoAchado = foundText.getText().substring(start, end + 1);
+
+    // Deleta o texto antigo
+    foundText.deleteText(start, end);
+    // Insere o novo texto sem o símbolo e com a numeração atual
+    const novoTexto = "Artigo " + contador;
+    foundText.insertText(start, novoTexto);
+
+    // Define o tamanho da fonte para o texto inserido
+    foundText.setFontSize(start, start + novoTexto.length - 1, 12);
+
+    contador++;
+    searchResult = textElement.findText(regex.source, searchResult);
+  }
+
+  Logger.log("Artigos renumerados e com fonte tamanho 11!");
+}
