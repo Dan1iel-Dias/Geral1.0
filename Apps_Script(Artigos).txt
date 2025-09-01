@@ -1,5 +1,5 @@
 function renumerarArtigosSemSimbolo() {
-  const doc = DocumentApp.openById("1bN91wlYFt2JJ1mta9KLQBOAIL47OYeZHDJ37T4GHmz8");
+  const doc = DocumentApp.openById("SEU ID!DOCS");
   const body = doc.getBody();
   const textElement = body.editAsText();
 
@@ -32,3 +32,4 @@ function renumerarArtigosSemSimbolo() {
 
   Logger.log("Artigos renumerados e com fonte tamanho 11!");
 }
+
